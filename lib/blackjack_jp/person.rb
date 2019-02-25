@@ -8,8 +8,8 @@ module BlackjackJp
       @hand = hand
     end
 
-    def drow(num = 1)
-      @hand += deck.shift(num)
+    def draw(num = 1)
+      @hand += @deck.shift(num)
     end
   end
 end
