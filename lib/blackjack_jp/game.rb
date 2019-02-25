@@ -77,6 +77,7 @@ module BlackjackJp
           puts "ディーラーは#{@dealer.draw.last}を引きました。点数は#{get_point(@dealer.hand)}点です。"
           sleep(1.5)
           judge(get_point(@dealer.hand))
+          dealer_turn
         end
       end
 
