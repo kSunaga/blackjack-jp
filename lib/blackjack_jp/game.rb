@@ -72,12 +72,12 @@ module BlackjackJp
       end
 
       def dealer_draw
-        if 17 >= get_point(@dealer.hand)
+        if 17 > get_point(@dealer.hand)
           sleep(1.5)
           puts "ディーラーは#{@dealer.draw.last}を引きました。点数は#{get_point(@dealer.hand)}点です。"
           sleep(1.5)
           judge(get_point(@dealer.hand))
-          dealer_turn
+          dealer_draw
         end
       end
 
