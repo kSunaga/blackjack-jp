@@ -6,8 +6,8 @@ require "blackjack_jp/version"
 Gem::Specification.new do |spec|
   spec.name          = "blackjack_jp"
   spec.version       = BlackjackJp::VERSION
-  spec.authors       = ["k.sunaga-cq"]
-  spec.email         = ["k.sunaga@caraquri.com"]
+  spec.authors       = ["kSunaga"]
+  spec.email         = ["jokers4140@gmail.com"]
 
   spec.summary       = %q{This is Blackjack for Japanese}
   spec.description   = %q{This is simple Blackjack}

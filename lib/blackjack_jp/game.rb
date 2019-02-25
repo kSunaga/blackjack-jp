@@ -2,14 +2,12 @@ require 'blackjack_jp/deck'
 require 'blackjack_jp/person'
 
 module BlackjackJp
-
   module Game
-
     def self.start
       init
       p 'ゲームスタート'
-      @dealer.drow(2)
-      @player.drow(2)
+      @dealer.draw(2)
+      @player.draw(2)
       puts "ディーラーの1枚目の手札は#{@dealer.hand[0]}です。"
       puts "#{@player.name}の手札は#{@player.hand}です。点数は#{get_point(@player.hand)}です。"
       player_turn
@@ -21,12 +19,13 @@ module BlackjackJp
     private
 
     class << self
+
       def player_turn
         puts "1: ヒット, 2: スタンド"
         flag = gets.chomp
         if flag == '1'
           puts 'ヒットしました。'
-          puts "#{@player.name}#{@player.drow.last}を引きました。点数は#{get_point(@player.hand)}です。"
+          puts "#{@player.name}#{@player.draw.last}を引きました。点数は#{get_point(@player.hand)}です。"
           judge(get_point(@player.hand))
           player_turn
         elsif flag == '2'
@@ -42,20 +41,20 @@ module BlackjackJp
         puts 'ディーラ-のターンです。'
         puts "ディーラーの手札は#{@dealer.hand}で#{get_point(@dealer.hand)}点です。"
         judge(get_point(@dealer.hand))
-        dealer_drow
+        dealer_draw
         puts "ディーラーの点数は#{get_point(@dealer.hand)}です。"
       end
 
       def get_point(hands)
         point = 0
-        converted_hands = convert_knit_to_int(hands)
+        converted_hands = convert_face_card_to_int(hands)
         converted_hands.each do |hand|
           point += hand[0].to_i
         end
         point
       end
 
-      def convert_knit_to_int(hands)
+      def convert_face_card_to_int(hands)
         hands.each_with_index do |hand, index|
           card_number = hand[0]
           if card_number == 'J' || card_number == 'Q' || card_number == 'K'
@@ -66,17 +65,13 @@ module BlackjackJp
       end
 
       def judge(point)
-        if point > 21
-          puts "バーストしました。"
-          puts @dealer_turn == false ? "#{@player.name}の負けです。" : "ディーラーの負けです。"
-          exit
-        end
+        bursted if point > 21
         point
       end
 
-      def dealer_drow
+      def dealer_draw
         if 17 >= get_point(@dealer.hand)
-          puts "ディーラーは#{@dealer.drow}を引きました。点数は#{get_point(@dealer.hand)}点です。"
+          puts "ディーラーは#{@dealer.draw}を引きました。点数は#{get_point(@dealer.hand)}点です。"
           judge(get_point(@dealer.hand))
         end
       end
@@ -105,6 +100,13 @@ module BlackjackJp
         @player = BlackjackJp::Person.new(name, deck)
         @dealer_turn = false
       end
+
+      def bursted
+        puts "バーストしました。"
+        puts @dealer_turn == false ? "#{@player.name}の負けです。" : "ディーラーの負けです。"
+        exit
+      end
+
     end
   end
 end
