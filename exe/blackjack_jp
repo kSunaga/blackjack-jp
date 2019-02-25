@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'blackjack_jp'
+
+puts BlackjackJp::Game.start
