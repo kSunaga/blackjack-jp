@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-$ blackjack_jp
+    $ blackjack_jp
 
 ## Development
 
