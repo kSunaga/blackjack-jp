@@ -12,7 +12,9 @@ module BlackjackJp
       puts "#{@player.name}の手札は#{@player.hand}です。点数は#{get_point(@player.hand)}です。"
       player_turn
       dealer_turn
+      sleep(1.5)
       duel
+      sleep(1.5)
       replay
     end
 
@@ -25,7 +27,7 @@ module BlackjackJp
         flag = gets.chomp
         if flag == '1'
           puts 'ヒットしました。'
-          puts "#{@player.name}#{@player.draw.last}を引きました。点数は#{get_point(@player.hand)}です。"
+          puts "#{@player.name}は#{@player.draw.last}を引きました。点数は#{get_point(@player.hand)}です。"
           judge(get_point(@player.hand))
           player_turn
         elsif flag == '2'
@@ -71,7 +73,9 @@ module BlackjackJp
 
       def dealer_draw
         if 17 >= get_point(@dealer.hand)
-          puts "ディーラーは#{@dealer.draw}を引きました。点数は#{get_point(@dealer.hand)}点です。"
+          sleep(1.5)
+          puts "ディーラーは#{@dealer.draw.last}を引きました。点数は#{get_point(@dealer.hand)}点です。"
+          sleep(1.5)
           judge(get_point(@dealer.hand))
         end
       end
